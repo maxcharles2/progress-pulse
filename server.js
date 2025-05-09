@@ -10,7 +10,8 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
-const commentRoutes = require("./routes/comments")
+const commentRoutes = require("./routes/comments");
+const planRoutes = require("./routes/plans");
 
 //Use .env file in config folder (to enable permissions to run the server with node server.js to render the frontend)
 require("dotenv").config({ path: "./config/.env" });
@@ -60,6 +61,7 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
+app.use("/plan", planRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

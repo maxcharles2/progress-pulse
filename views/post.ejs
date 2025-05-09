@@ -38,6 +38,44 @@
     <div class="mt-5">
       <!-- Rehab plan entry result goes here (EJS syntax) -->
       <h2>Rehab plan</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Exercise</th>
+            <th>Sets</th>
+            <th>Reps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% post.exercises.forEach(ex => { %>
+            <tr>
+              <td><%= ex.day %></td>
+              <td><%= ex.name %></td>
+              <td><%= ex.sets %></td>
+              <td><%= ex.reps %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+        <!-- <table border="1">
+          <tr>
+            <th>Day</th>
+            <th>Workout</th>
+          </tr>
+          <tr>
+            <td>Day 1</td>
+            <td>Weightlifting</td>
+          </tr>
+          <tr>
+            <td>Day 2</td>
+            <td>Weightlifting</td>
+          </tr>
+          <tr>
+            <td>Day 3</td>
+            <td>Weightlifting</td>
+          </tr>
+        </table> -->
       <h2>Patient feedback/questions</h2>
       <form action="/comment/createComment/<%=post._id%>" method="POST">
         <div class="mb-3">

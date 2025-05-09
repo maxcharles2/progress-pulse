@@ -17,9 +17,19 @@
                   <label for="title" class="form-label">Rehab plan title</label>
                   <input type="text" class="form-control" id="title" name="title">
               </div>
-              <!-- Add an area here to generate a table plan for a given phase (days of the week, exercises, sets and reps) -->
               <div>
-                <label for="">Rehab plan entry</label>
+                <!-- Add an area here to generate a table plan for a given phase (days of the week, exercise name, sets and reps) -->
+                <div id="planInputs">
+                  <h4>Rehab Plan</h4>
+                  <div class="exerciseRow mb-2">
+                    <!-- express.urlencoded in server.js turns exercises[0][day] to exercise[0].day -->
+                    <input type="text" name="exercises[0][day]" placeholder="Day" class="form-control mb-1" />
+                    <input type="text" name="exercises[0][name]" placeholder="Exercise Name" class="form-control mb-1" />
+                    <input type="text" name="exercises[0][sets]" placeholder="Sets" class="form-control mb-1" />
+                    <input type="text" name="exercises[0][reps]" placeholder="Reps" class="form-control mb-1" />
+                  </div>
+                </div>
+                <button id="addExerciseBtn" type="button" class="btn btn-secondary mt-2 mb-3">Add Exercise</button>
               </div>
               <div class="mb-3">
                 <!-- Ex. For quad sets emphasize full extension if you have any questions or feedback drop a comment -->

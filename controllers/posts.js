@@ -24,6 +24,7 @@ module.exports = {
     try {
       const post = await Post.findById(req.params.id);
       const comments = await Comment.find({ post: req.params.id }).lean();
+      console.log(post.exercises);
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
@@ -41,6 +42,7 @@ module.exports = {
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        exercises: req.body.exercises
       });
       console.log("Post has been added!");
       res.redirect("/profile");

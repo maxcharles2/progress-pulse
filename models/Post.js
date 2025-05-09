@@ -21,6 +21,14 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  exercises: [
+    {
+      day: String,
+      name: String,
+      sets: Number,
+      reps: Number
+    }
+  ],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
