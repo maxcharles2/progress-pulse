@@ -5,20 +5,29 @@
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
+              <!-- Below add account role here to verify that the account is either Physical Therapist or Patient -->
+              <p><strong>Role</strong>: <%# user.role (when achieved remove comment) %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">
-            <h2>Add a post</h2>
+            <h2>Add a plan</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
+                  <!-- Ex. Bob's ACL rehab plan/program -->
+                  <label for="title" class="form-label">Rehab plan title</label>
                   <input type="text" class="form-control" id="title" name="title">
               </div>
+              <!-- Add an area here to generate a table plan for a given phase (days of the week, exercises, sets and reps) -->
+              <div>
+                <label for="">Rehab plan entry</label>
+              </div>
               <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
+                <!-- Ex. For quad sets emphasize full extension if you have any questions or feedback drop a comment -->
+                <label for="caption" class="form-label">Physical Therapist instructions</label>
                 <textarea class="form-control" id="caption" name="caption"></textarea>
               </div>
               <div class="mb-3">
+                <!-- Image of the person or something to identify them or the plan -->
                 <label for="imgUpload" class="form-label">Image</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
@@ -37,7 +46,8 @@
         <% } %>
         </ul>
         <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+          <!-- Feed of all programs that the Physical Therapist can see of the patients -->
+          <a class="btn btn-primary" href="/feed">Return to all programs</a>
         </div>  
       </div>  
     </div>
