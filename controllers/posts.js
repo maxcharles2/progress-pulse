@@ -64,6 +64,28 @@ module.exports = {
       console.log(err);
     }
   },
+  updateExercise: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      //updated exercise value from the form submit to edit the rehab plan
+      const updatedExercise = {
+        day: req.body.day,
+        name: req.body.name,
+        sets: Number(req.body.sets),
+        reps: Number(req.body.reps)
+      };
+
+      //update the specific exercise at a given index
+      post.exercises[req.params.index] = updatedExercise;
+
+      await post.save()
+
+      res.redirect(`/post/${req.params.id}`)
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Error updating exercise");
+    }
+  },
   deletePost: async (req, res) => {
     try {
       // Find post by id

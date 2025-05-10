@@ -58,24 +58,34 @@
           <% }) %>
         </tbody>
       </table>
-        <!-- <table border="1">
+
+      <h2>Edit rehab plan</h2>
+      <!-- form that edits the current post -->
+      <table class="table">
+        <thead>
           <tr>
             <th>Day</th>
-            <th>Workout</th>
+            <th>Exercise Name</th>
+            <th>Sets</th>
+            <th>Reps</th>
+            <th>Edit</th>
           </tr>
-          <tr>
-            <td>Day 1</td>
-            <td>Weightlifting</td>
-          </tr>
-          <tr>
-            <td>Day 2</td>
-            <td>Weightlifting</td>
-          </tr>
-          <tr>
-            <td>Day 3</td>
-            <td>Weightlifting</td>
-          </tr>
-        </table> -->
+        </thead>
+        <tbody>
+          <% post.exercises.forEach((ex, index) => { %>
+            <tr>
+              <form action="/post/<%= post._id %>/editExercise/<%= index %>?_method=PUT" method="POST">
+                <td><input name="day" type="text" value="<%= ex.day %>" class="form-control" /></td>
+                <td><input name="name" type="text" value="<%= ex.name %>" class="form-control" /></td>
+                <td><input name="sets" type="number" value="<%= ex.sets %>" class="form-control" /></td>
+                <td><input name="reps" type="number" value="<%= ex.reps %>" class="form-control" /></td>
+                <td><button type="submit" class="btn btn-primary btn-sm">Update</button></td>
+              </form>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
       <h2>Patient feedback/questions</h2>
       <form action="/comment/createComment/<%=post._id%>" method="POST">
         <div class="mb-3">

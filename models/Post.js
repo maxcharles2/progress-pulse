@@ -39,4 +39,4 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Post", PostSchema); //Name of the collection (mongoose makes the collection name plural if it isn't already)
