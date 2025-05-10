@@ -86,6 +86,20 @@ module.exports = {
       res.status(500).send("Error updating exercise");
     }
   },
+  deleteExercise: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id)
+
+      post.exercises.splice(req.params.index, 1);
+
+      await post.save();
+
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err)
+      res.status.send("Error deleting exercise")
+    }
+  },
   deletePost: async (req, res) => {
     try {
       // Find post by id

@@ -69,6 +69,7 @@
             <th>Sets</th>
             <th>Reps</th>
             <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -80,6 +81,10 @@
                 <td><input name="sets" type="number" value="<%= ex.sets %>" class="form-control" /></td>
                 <td><input name="reps" type="number" value="<%= ex.reps %>" class="form-control" /></td>
                 <td><button type="submit" class="btn btn-primary btn-sm">Update</button></td>
+              </form>
+
+              <form action="/post/<%= post._id %>/deleteExercise/<%= index %>?_method=DELETE" method="POST" style="display:inline;">
+                <td><button type="submit" class="btn btn-danger btn-sm">Delete</button></td>
               </form>
             </tr>
           <% }) %>
