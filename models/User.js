@@ -9,6 +9,13 @@ const UserSchema = new mongoose.Schema({
     type: String,
     enum: ['Physical Therapist', 'Patient'], //role is restricted to these values
     required: true
+  },
+  therapist: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: () => {
+      return this.role === "Patient";
+    }
   }
 });
 

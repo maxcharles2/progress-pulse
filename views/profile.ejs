@@ -6,16 +6,20 @@
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <!-- Below add account role here to verify that the account is either Physical Therapist or Patient -->
-              <p><strong>Role</strong>: <%= user.role %></p>
+              <p><strong>Role</strong>: <%= user.role || 'Not specified' %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
+        <% if (user.role === "Patient" && user.therapist) { %>
+          <p><strong>Physical Therapist</strong>: <%= user.therapist.userName %></p>
+        <% } %>
+        <% if (user && user.role === "Physical Therapist") { %> 
           <div class="mt-5">
             <h2>Add a plan</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <!-- Ex. Bob's ACL rehab plan/program -->
-                  <label for="title" class="form-label">Rehab plan title</label>
-                  <input type="text" class="form-control" id="title" name="title">
+                  <label for="title" class="form-label">Rehab plan </label>
+                  <input type="text" class="form-control" id="" name="">
               </div>
               <div>
                 <!-- Add an area here to generate a table plan for a given phase (days of the week, exercise name, sets and reps) -->
@@ -45,9 +49,7 @@
             </form>
           </div>
       </div>
-      <div>
-        <h2>Edit plan</h2>
-      </div>
+
       <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
@@ -63,6 +65,7 @@
           <a class="btn btn-primary" href="/feed">Return to all programs</a>
         </div>  
       </div>  
+      <% } %>
     </div>
   </div>
 </div>

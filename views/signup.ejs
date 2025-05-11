@@ -15,32 +15,36 @@
                 <form action="/signup" method="POST">
                     <div class="mb-3">
                         <label for="userName" class="form-label">User Name</label>
-                        <input type="text" class="form-control" id="userName" name="userName">
+                        <input type="text" class="form-control" id="userName" name="userName" required>
                       </div>
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
                       <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" name="password">
+                      <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <div class="mb-3">
                         <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                     </div>
                     <div class="mb-3">
-                        <label for="role" class="form-label">Account Type</label>
-                        <select class="form-control" id="role" name="role" required>
-                          <option value="">Select a role</option>
-                          <option value="Physical Therapist">Physical Therapist</option>
-                          <option value="Patient">Patient</option>
-                        </select>
-                      </div>
-                    <div>
-                      <!-- Have a drop down of two different account types (Physical Therapist or patient) and here is what will set user.role -->
-                      <label for="">Account type</label>
+                      <label for="role" class="form-label">Account Type</label>
+                      <select class="form-control" id="role" name="role" required>
+                        <option value="">Select a role</option>
+                        <option value="Physical Therapist">Physical Therapist</option>
+                        <option value="Patient">Patient</option>
+                      </select>
+                    </div>
+                    <div id="therapistSelect" class="hidden">
+                      <label for="therapist">Choose your Physical Therapist</label>
+                      <select class="form-control" name="therapistId" id="therapistId">
+                        <% therapists.forEach(function(therapist) { %>
+                          <option value="<%= therapist._id %>"><%= therapist.userName %></option>
+                        <% }) %>
+                      </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

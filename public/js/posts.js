@@ -2,6 +2,8 @@
 //DOMContentLoaded present just in case the script tag is not at the very bottom where the closing body tag is and multiple script tags get added that manipulate the DOM
 document.addEventListener("DOMContentLoaded", () => {
     const addExerciseBtn = document.getElementById("addExerciseBtn");
+    const roleSelect = document.getElementById("role");
+    const therapistDiv = document.getElementById("therapistSelect");
     // Checker to make sure the button is on the ejs file (footer partial puts the script tag on all ejs files and that button isn't in all of them)
     if(addExerciseBtn){
         let exerciseCount = 1;
@@ -21,6 +23,20 @@ document.addEventListener("DOMContentLoaded", () => {
             exerciseCount++;
         }
 
-        document.getElementById("addExerciseBtn").addEventListener("click", addExerciseRow);
+        addExerciseBtn.addEventListener("click", addExerciseRow);
     }
+
+    // Make sure roleSelect (element with an id="role") exists in the DOM 
+    if (roleSelect) {
+        function showTherapistSelection() {
+            if (roleSelect.value === "Patient"){
+                therapistDiv.classList.remove("hidden");
+            } else {
+                therapistDiv.classList.add("hidden");
+            }
+        }
+        roleSelect.addEventListener("change", showTherapistSelection);
+        // Also handle case where the page reloads with "Patient" preselected
+        showTherapistSelection();
+    }  
 })

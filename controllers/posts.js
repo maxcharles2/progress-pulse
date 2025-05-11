@@ -1,11 +1,19 @@
 const cloudinary = require("../middleware/cloudinary");
+const User = require("../models/User");
 const Post = require("../models/Post");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      // Fetch the user from DB and populate their therapist if applicable
+      const user = await User.findById(req.user.id).populate("therapist").lean();
+      // Get posts belonging to that user
+      const posts = await Post.find({ user: req.user.id }).lean();
+
+      res.render("profile.ejs", { 
+        posts: posts, 
+        user: user // now includes therapist populated if user is a patient
+      });
     } catch (err) {
       console.log(err);
     }
