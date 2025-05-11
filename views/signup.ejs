@@ -30,6 +30,14 @@
                         <label for="confirmPassword" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                     </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Account Type</label>
+                        <select class="form-control" id="role" name="role" required>
+                          <option value="">Select a role</option>
+                          <option value="Physical Therapist">Physical Therapist</option>
+                          <option value="Patient">Patient</option>
+                        </select>
+                      </div>
                     <div>
                       <!-- Have a drop down of two different account types (Physical Therapist or patient) and here is what will set user.role -->
                       <label for="">Account type</label>

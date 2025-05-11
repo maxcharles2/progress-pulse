@@ -18,6 +18,12 @@ exports.postLogin = (req, res, next) => {
   if (validator.isEmpty(req.body.password))
     validationErrors.push({ msg: "Password cannot be blank." });
 
+  //role validation added
+  const allowedRoles = ['Physical Therapist', 'Patient'];
+  if(!allowedRoles.includes(req.body.role)){
+    validationErrors.push({ msg: "Please select a valid account type." })
+  }
+
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
     return res.redirect("/login");
@@ -88,6 +94,7 @@ exports.postSignup = (req, res, next) => {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
+    role: req.body.role
   });
 
   User.findOne(

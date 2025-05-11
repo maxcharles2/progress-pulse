@@ -5,6 +5,11 @@ const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
+  role: {
+    type: String,
+    enum: ['Physical Therapist', 'Patient'], //role is restricted to these values
+    required: true
+  }
 });
 
 // Password hash middleware.
