@@ -7,12 +7,20 @@ module.exports = {
     try {
       // Fetch the user from DB and populate their therapist if applicable
       const user = await User.findById(req.user.id).populate("therapist").lean();
-      // Get posts belonging to that user
+      // Get posts belonging to that user (physical therapist)
       const posts = await Post.find({ user: req.user.id }).lean();
 
+      let patients = [];
+
+      //If user is a physical therapist get their associated patients as an array and reassigned to empty patients array to the result of the DB query
+      if (user.role === "Physical Therapist") {
+        patients = await User.find({ therapist: user._id, role: "Patient" }).lean()
+      }
+
       res.render("profile.ejs", { 
-        posts: posts, 
-        user: user // now includes therapist populated if user is a patient
+        posts: posts, //physical therapist's posts
+        user: user, // now includes therapist populated if user is a patient
+        patients: patients //Pass patients array to the profile.ejs file in views folder
       });
     } catch (err) {
       console.log(err);
@@ -22,7 +30,8 @@ module.exports = {
     try {
       //what creates an array for the EJS to loop
       // console.log(posts, "this is an array of posts");
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      //populate("patient") replaces the id of the patient and puts the entire user document (possible with ref: "User") of the patient of a specific id
+      const posts = await Post.find().populate("patient").sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -49,7 +58,8 @@ module.exports = {
         cloudinaryId: result.public_id,
         caption: req.body.caption,
         likes: 0,
-        user: req.user.id,
+        user: req.user.id, //physical therapist's id
+        patient: req.body.patient, // selected patient's id
         exercises: req.body.exercises
       });
       console.log("Post has been added!");

@@ -10,7 +10,7 @@
             </a>
           </li>
           <!-- EJS syntax to enter the patient account name -->
-          <p>Patient name</p>
+          <p>Patient: <%= posts[i].patient?.userName || 'Unassigned' %></p>
         <% } %>
         </ul>
     </div>
