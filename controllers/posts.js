@@ -31,7 +31,18 @@ module.exports = {
       //what creates an array for the EJS to loop
       // console.log(posts, "this is an array of posts");
       //populate("patient") replaces the id of the patient and puts the entire user document (possible with ref: "User") of the patient of a specific id
-      const posts = await Post.find().populate("patient").sort({ createdAt: "desc" }).lean();
+      
+      // Only allow access if user is a physical therapist
+      if (req.user.role !== "Physical Therapist") {
+        return res.status(403).send("Access denied");
+      }
+
+      // Get the patients assigned to this therapist
+      const patients = await User.find({ therapist: req.user.id }, '_id').lean();
+      const patientIds = patients.map(p => p._id);
+
+      // Get posts created for those patients
+      const posts = await Post.find({ patient: { $in: patientIds } }).populate("patient").sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
