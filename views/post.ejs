@@ -131,10 +131,17 @@
         </li>
       <% } %>
     </ul>
+    <% if (user.role === "Patient") { %>
     <div class="col-6 mt-5">
-      <a class="btn btn-primary red-bg" href="/profile">Return to Plan Creation</a>
-      <a class="btn btn-primary red-bg" href="/feed">Return to Patient Plans</a>
+      <a class="btn btn-primary red-bg" href="/profile">Return to profile</a>
     </div>
+    <% } %>
+    <% if (user.role === "Physical Therapist") { %>
+      <div class="col-6 mt-5">
+        <a class="btn btn-primary red-bg" href="/profile">Return to Plan Creation</a>
+        <a class="btn btn-primary red-bg" href="/feed">Return to Patient Plans</a>
+      </div>
+      <% } %>
   </div>
 </div>
 
