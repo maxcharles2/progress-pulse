@@ -32,8 +32,10 @@ A full-stack web application designed to help physical therapy patients and ther
 
 1. **Clone the Repository**
    
-   git clone https://github.com/maxcharles2/demo-day-pt-rehab-tracker.git (or fork and use your link up to you)
+   git clone https://github.com/maxcharles2/progress-pulse-2.git (or fork and use your link up to you)
+
    cd demo-day-pt-rehab-tracker
+
    open up project in your IDE (VS Code or otherwise)
 
 3. **Node modules**
