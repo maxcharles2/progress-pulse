@@ -3,6 +3,13 @@
 A full-stack web application designed to help physical therapy patients and therapists track rehabilitation progress, log exercises and update notes.
 
 ---
+## 🌟 Name & Concept
+
+- **Meaning**: “Progress” represents steady improvement over time. “Pulse” suggests rhythm, life, and ongoing movement.
+
+- **Vibe**: Energetic and dynamic; it frames rehab as an ongoing journey where each day matters—like a heartbeat.
+
+- **Inspiration**: Recovery happens step by step, like a pulse. This name captures the idea that even small improvements are vital signs of progress.
 
 ## 🚀 Features
 
