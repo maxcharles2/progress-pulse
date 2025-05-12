@@ -5,27 +5,72 @@
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+              <!-- Below add account role here to verify that the account is either Physical Therapist or Patient -->
+              <p><strong>Role</strong>: <%= user.role || 'Not specified' %></p>
+              <a href="/logout" class="col-3 btn btn-primary red-bg">Logout</a>
           </div>
+        <% if (user.role === "Patient" && user.therapist) { %>
+          <p><strong>Physical Therapist</strong>: <%= user.therapist.userName %></p>
+        <% } %>
+        <% if (user.role === "Patient") { %>
+          <h2 class="text-center">Your Rehab Plan</h2>
+          <ul class="row list-unstyled">
+            <% posts.forEach(post => { %>
+              <li class="col-6 justify-content-between mt-5">
+                <a href="/post/<%= post._id %>">
+                  <img class="img-fluid" src="<%= post.image %>">
+                </a>
+                <p><strong>Posted by:</strong> <%= post.user?.userName || "Unknown" %></p>
+              </li>
+            <% }) %>
+          </ul>
+        <% } %>        
+        <% if (user && user.role === "Physical Therapist") { %> 
           <div class="mt-5">
-            <h2>Add a post</h2>
+            <h2>Add a plan</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
+                <label for="patient" class="form-label">Assign Plan to Patient</label>
+                <select class="form-control" id="patient" name="patient" required>
+                  <% patients.forEach(function(patient) { %>
+                    <option value="<%= patient._id %>"><%= patient.userName %></option>
+                  <% }) %>
+                </select>
               </div>
               <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
+                  <!-- Ex. Bob's ACL rehab plan/program -->
+                  <label for="title" class="form-label">Rehab plan title</label>
+                  <input type="text" class="form-control" id="title" name="title">
+              </div>
+              <div>
+                <!-- Add an area here to generate a table plan for a given phase (days of the week, exercise name, sets and reps) -->
+                <div id="planInputs">
+                  <h4>Rehab Plan</h4>
+                  <div class="exerciseRow mb-2">
+                    <!-- express.urlencoded in server.js turns exercises[0][day] to exercise[0].day -->
+                    <input type="text" name="exercises[0][day]" placeholder="Day" class="form-control mb-1" />
+                    <input type="text" name="exercises[0][name]" placeholder="Exercise Name" class="form-control mb-1" />
+                    <input type="text" name="exercises[0][sets]" placeholder="Sets" class="form-control mb-1" />
+                    <input type="text" name="exercises[0][reps]" placeholder="Reps" class="form-control mb-1" />
+                  </div>
+                </div>
+                <button id="addExerciseBtn" type="button" class="btn btn-secondary mt-2 mb-3">Add Exercise</button>
+              </div>
+              <div class="mb-3">
+                <!-- Ex. For quad sets emphasize full extension if you have any questions or feedback drop a comment -->
+                <label for="caption" class="form-label">Physical Therapist instructions</label>
                 <textarea class="form-control" id="caption" name="caption"></textarea>
               </div>
               <div class="mb-3">
+                <!-- Image of the person or something to identify them or the plan -->
                 <label for="imgUpload" class="form-label">Image</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              <button type="submit" class="btn btn-primary red-bg" value="Upload">Submit</button>
             </form>
           </div>
       </div>
+
       <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
@@ -37,9 +82,11 @@
         <% } %>
         </ul>
         <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+          <!-- Feed of all programs that the Physical Therapist can see of the patients -->
+          <a class="btn btn-primary red-bg" href="/feed">Return to all programs</a>
         </div>  
       </div>  
+      <% } %>
     </div>
   </div>
 </div>

@@ -18,6 +18,12 @@ exports.postLogin = (req, res, next) => {
   if (validator.isEmpty(req.body.password))
     validationErrors.push({ msg: "Password cannot be blank." });
 
+  // role validation added
+  // const allowedRoles = ['Physical Therapist', 'Patient'];
+  // if(!allowedRoles.includes(req.body.role)){
+  //   validationErrors.push({ msg: "Please select a valid account type." })
+  // }
+
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
     return res.redirect("/login");
@@ -56,13 +62,22 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.getSignup = (req, res) => {
+exports.getSignup = async (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
   }
-  res.render("signup", {
-    title: "Create Account",
-  });
+
+  const therapists = User.find({ role: "Physical Therapist" }, (err, therapists) => {
+    if (err) {
+      return res.status(500).send("Error fetching therapists");
+    }
+
+    res.render("signup", {
+      title: "Create Account",
+      therapists
+    });
+    
+  })
 };
 
 exports.postSignup = (req, res, next) => {
@@ -76,6 +91,16 @@ exports.postSignup = (req, res, next) => {
   if (req.body.password !== req.body.confirmPassword)
     validationErrors.push({ msg: "Passwords do not match" });
 
+  // role validation added
+  const allowedRoles = ['Physical Therapist', 'Patient'];
+  if(!allowedRoles.includes(req.body.role)){
+    validationErrors.push({ msg: "Please select a valid account type." })
+  }
+
+  if (req.body.role === "Patient" && !req.body.therapistId) {
+    validationErrors.push({ msg: "Please select a physical therapist." });
+  }
+
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
     return res.redirect("../signup");
@@ -84,12 +109,16 @@ exports.postSignup = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
+  //Build new user
   const user = new User({
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
+    role: req.body.role,
+    therapist: req.body.role === "Patient" ? req.body.therapistId : null
   });
 
+  // Check if user already exists
   User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
     (err, existingUser) => {

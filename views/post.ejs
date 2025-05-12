@@ -36,18 +36,77 @@
       <p><%= post.caption %></p>
     </div>
     <div class="mt-5">
-      <h2>Add a comment</h2>
+      <!-- Rehab plan entry result goes here (EJS syntax) -->
+      <h2>Rehab plan</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Exercise</th>
+            <th>Sets</th>
+            <th>Reps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% post.exercises.forEach(ex => { %>
+            <tr>
+              <td><%= ex.day %></td>
+              <td><%= ex.name %></td>
+              <td><%= ex.sets %></td>
+              <td><%= ex.reps %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% if (user.role === 'Physical Therapist') { %>
+      <h2>Edit rehab plan</h2>
+      <!-- form that edits the current post -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Exercise Name</th>
+            <th>Sets</th>
+            <th>Reps</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% post.exercises.forEach((ex, index) => { %>
+            <tr>
+              <form action="/post/<%= post._id %>/editExercise/<%= index %>?_method=PUT" method="POST">
+                <td><input name="day" type="text" value="<%= ex.day %>" class="form-control" /></td>
+                <td><input name="name" type="text" value="<%= ex.name %>" class="form-control" /></td>
+                <td><input name="sets" type="number" value="<%= ex.sets %>" class="form-control" /></td>
+                <td><input name="reps" type="number" value="<%= ex.reps %>" class="form-control" /></td>
+                <td><button type="submit" class="btn btn-primary btn-sm">Update</button></td>
+              </form>
+
+              <form action="/post/<%= post._id %>/deleteExercise/<%= index %>?_method=DELETE" method="POST" style="display:inline;">
+                <td><button type="submit" class="btn btn-danger btn-sm">Delete</button></td>
+              </form>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+
+      <h2>Patient feedback/questions</h2>
       <form action="/comment/createComment/<%=post._id%>" method="POST">
         <div class="mb-3">
             <label for="comment" class="form-label">Comment</label>
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary red-bg">Submit</button>
       </form>
     </div>
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="col-6 justify-content-between mt-5">
+          <!-- Use old codepen sample for comments inspiration -->
+          <!-- EJS syntax to get person name -->
+          <p>Comment by: <%= comments[i].user?.userName || 'Anonymous'%></p>
           <p><%=comments[i].comment%></p>
           <div class="row justify-content-between">
             <form
@@ -73,8 +132,8 @@
       <% } %>
     </ul>
     <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      <a class="btn btn-primary red-bg" href="/profile">Return to Plan Creation</a>
+      <a class="btn btn-primary red-bg" href="/feed">Return to Patient Plans</a>
     </div>
   </div>
 </div>

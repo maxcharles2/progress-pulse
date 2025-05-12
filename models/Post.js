@@ -21,6 +21,14 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  exercises: [
+    {
+      day: String,
+      name: String,
+      sets: Number,
+      reps: Number
+    }
+  ],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -29,6 +37,10 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  patient: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Post", PostSchema); //Name of the collection (mongoose makes the collection name plural if it isn't already)

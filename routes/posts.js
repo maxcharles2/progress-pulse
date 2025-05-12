@@ -16,6 +16,11 @@ router.post("/createComment", upload.single("file"), commentsController.createCo
 
 router.put("/likePost/:id", postsController.likePost);
 
+router.put("/:id/editExercise/:index", postsController.updateExercise);
+
 router.delete("/deletePost/:id", postsController.deletePost);
+
+router.delete("/:id/deleteExercise/:index", postsController.deleteExercise);
+
 
 module.exports = router;

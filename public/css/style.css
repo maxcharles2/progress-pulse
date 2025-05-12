@@ -1,0 +1,52 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+}
+
+a {
+    color: #fff;
+}
+
+body {
+    background-color: #a8dadc;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.blue-bg {
+    background-color: #457b9d;
+}
+
+.dark-blue-bg {
+    background-color: #1d3557;
+}
+
+.light-blue-bg {
+    background-color: #a8dadc;
+}
+
+.hidden {
+    display: none;
+}
+
+.red-bg {
+    background-color: #e63946;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.white {
+    color: #fff;
+}
+
+#addExerciseBtn {
+    background-color: #e63946;
+}
+
+#addExerciseBtn:hover {
+    background-color: #0d62fd;
+}
