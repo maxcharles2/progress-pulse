@@ -12,6 +12,19 @@
         <% if (user.role === "Patient" && user.therapist) { %>
           <p><strong>Physical Therapist</strong>: <%= user.therapist.userName %></p>
         <% } %>
+        <% if (user.role === "Patient") { %>
+          <h2 class="text-center">Your Rehab Plan</h2>
+          <ul class="row list-unstyled">
+            <% posts.forEach(post => { %>
+              <li class="col-6 justify-content-between mt-5">
+                <a href="/post/<%= post._id %>">
+                  <img class="img-fluid" src="<%= post.image %>">
+                </a>
+                <p><strong>Posted by:</strong> <%= post.user?.userName || "Unknown" %></p>
+              </li>
+            <% }) %>
+          </ul>
+        <% } %>        
         <% if (user && user.role === "Physical Therapist") { %> 
           <div class="mt-5">
             <h2>Add a plan</h2>

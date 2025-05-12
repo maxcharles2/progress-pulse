@@ -8,13 +8,21 @@ module.exports = {
       // Fetch the user from DB and populate their therapist if applicable
       const user = await User.findById(req.user.id).populate("therapist").lean();
       // Get posts belonging to that user (physical therapist)
-      const posts = await Post.find({ user: req.user.id }).lean();
 
+      //Empty lists until role is assigned
+      let posts = [];
       let patients = [];
 
-      //If user is a physical therapist get their associated patients as an array and reassigned to empty patients array to the result of the DB query
+      //If user is a physical therapist get their associated patients as an array and reassigned to empty patients/posts array to the result of the DB query
       if (user.role === "Physical Therapist") {
+        // Get posts created by this PT
+        posts = await Post.find({ user: req.user.id }).populate("patient").lean();
+
+        // Get all patients assigned to this PT
         patients = await User.find({ therapist: user._id, role: "Patient" }).lean()
+      } else if (user.role === "Patient") {
+        // Only show posts assigned to this patient
+        posts = await Post.find({ patient: req.user.id }).populate("user").lean();
       }
 
       res.render("profile.ejs", { 

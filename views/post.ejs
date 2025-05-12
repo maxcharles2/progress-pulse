@@ -58,7 +58,7 @@
           <% }) %>
         </tbody>
       </table>
-
+    <% if (user.role === 'Physical Therapist') { %>
       <h2>Edit rehab plan</h2>
       <!-- form that edits the current post -->
       <table class="table">
@@ -90,6 +90,7 @@
           <% }) %>
         </tbody>
       </table>
+    <% } %>
 
       <h2>Patient feedback/questions</h2>
       <form action="/comment/createComment/<%=post._id%>" method="POST">
