@@ -7,7 +7,7 @@
               <p><strong>Email</strong>: <%= user.email %></p>
               <!-- Below add account role here to verify that the account is either Physical Therapist or Patient -->
               <p><strong>Role</strong>: <%= user.role || 'Not specified' %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+              <a href="/logout" class="col-3 btn btn-primary red-bg">Logout</a>
           </div>
         <% if (user.role === "Patient" && user.therapist) { %>
           <p><strong>Physical Therapist</strong>: <%= user.therapist.userName %></p>
@@ -53,7 +53,7 @@
                 <label for="imgUpload" class="form-label">Image</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              <button type="submit" class="btn btn-primary red-bg" value="Upload">Submit</button>
             </form>
           </div>
       </div>
@@ -70,7 +70,7 @@
         </ul>
         <div class="row justify-content-center mt-5">
           <!-- Feed of all programs that the Physical Therapist can see of the patients -->
-          <a class="btn btn-primary" href="/feed">Return to all programs</a>
+          <a class="btn btn-primary red-bg" href="/feed">Return to all programs</a>
         </div>  
       </div>  
       <% } %>
