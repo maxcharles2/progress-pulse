@@ -1,5 +1,21 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 table, th, td {
     border: 1px solid black;
+}
+
+.blue-bg {
+    background-color: #457b9d
+}
+
+.dark-blue-bg {
+    background-color: #1d3557;
+}
+
+.light-blue-bg {
+    background-color: #a8dadc
 }
 
 .hidden {

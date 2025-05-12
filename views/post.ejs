@@ -105,7 +105,7 @@
         <li class="col-6 justify-content-between mt-5">
           <!-- Use old codepen sample for comments inspiration -->
           <!-- EJS syntax to get person name -->
-          <p>username of person commenting</p>
+          <p>Comment by: <%= comments[i].user?.userName || 'Anonymous'%></p>
           <p><%=comments[i].comment%></p>
           <div class="row justify-content-between">
             <form
