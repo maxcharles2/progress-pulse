@@ -1,41 +1,43 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
-        <form
-          class="col-1"
-          action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
-        </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
-        <%if(post.user == user.id){ %>
-        <form
-          action="/post/deletePost/<%= post.id %>?_method=DELETE"
-          method="POST"
-          class="col-3"
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
-        <!-- <form
-          class="col-1"
-          action="/post/createComment/<%= post.id %>"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit">Make comment</button>
-          <textarea name="" id=""></textarea>
-        </form> -->
+    <div class="form flex-5">
+      <div class="col-6">
+        <h2><%= post.title %></h2>
+        <img class="img-fluid" src="<%= post.image%>" />
+        <div class="row justify-content-between">
+          <form
+            class="col-1"
+            action="/post/likePost/<%= post.id %>?_method=PUT"
+            method="POST"
+          >
+            <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          </form>
+          <h3 class="col-3">Likes: <%= post.likes %></h3>
+          <%if(post.user == user.id){ %>
+          <form
+            action="/post/deletePost/<%= post.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+          >
+            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          </form>
+          <%}%>
+          <!-- <form
+            class="col-1"
+            action="/post/createComment/<%= post.id %>"
+            method="POST"
+          >
+            <button class="btn btn-primary fa fa-heart" type="submit">Make comment</button>
+            <textarea name="" id=""></textarea>
+          </form> -->
+        </div>
+      </div>
+      <div class="col-3 mt-5">
+        <p><%= post.caption %></p>
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
-    </div>
-    <div class="mt-5">
+    <div class="mt-5 form">
       <!-- Rehab plan entry result goes here (EJS syntax) -->
       <h2>Rehab plan</h2>
       <table class="table table-striped">
@@ -103,7 +105,7 @@
     </div>
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
+        <li class="col-6 justify-content-between mt-5 form no-bullet">
           <!-- Use old codepen sample for comments inspiration -->
           <!-- EJS syntax to get person name -->
           <p>Comment by: <%= comments[i].user?.userName || 'Anonymous'%></p>

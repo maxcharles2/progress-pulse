@@ -80,6 +80,11 @@ table, th, td {
     justify-content: center;
 }
 
+.flex-5 {
+    display: flex;
+    justify-content: space-around;
+}
+
 .footer {
     color: #fff;
 }
