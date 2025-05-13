@@ -65,20 +65,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         }
-
-        // titleFilter.addEventListener('change', function () {
-        //     const selectedTitle = this.value;
-        //     const posts = document.querySelectorAll('.post-item');
-        
-        //     posts.forEach(post => {
-        //         const postTitle = post.getAttribute('data-title');
-        //         // if (selectedTitle === 'all' || postTitle === selectedTitle) {
-        //         if (postTitle === selectedTitle) {
-        //             post.style.display = 'block';
-        //         } else {
-        //             post.style.display = 'none';
-        //         }
-        //     });
-        // });
     }
 })
