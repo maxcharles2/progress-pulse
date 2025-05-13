@@ -1,16 +1,17 @@
 <%- include('partials/header') -%>
   <div class="container">
-    <div class="row justify-content-center mt-5">
+    <div class="justify-content-center mt-5">
       <h1 class="text-center">Patient plans</h1>
-      <ul class="row list-unstyled">
+      <ul class="list-unstyled flex-6">
         <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
+          <li class="col-6 justify-content-between mt-5 form w-10">
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
+            <p>Patient: <%= posts[i].patient?.userName || 'Unassigned' %></p>
           </li>
           <!-- EJS syntax to enter the patient account name -->
-          <p>Patient: <%= posts[i].patient?.userName || 'Unassigned' %></p>
+          
         <% } %>
         </ul>
     </div>

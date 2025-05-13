@@ -85,6 +85,11 @@ table, th, td {
     justify-content: space-around;
 }
 
+.flex-6 {
+    display: flex;
+    justify-content: space-around;
+}
+
 .footer {
     color: #fff;
 }
@@ -173,6 +178,10 @@ table, th, td {
 
 .w-5 {
     width: 5%;
+}
+
+.w-10 {
+    width: 10%;
 }
 
 .w-20 {
