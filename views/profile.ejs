@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <div class="">
-  <div class="mt-5">
-      <div>
+  <div class="mt-5 flex-4">
+      <div class="w-40 mright-2">
         <div class="text-center">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
@@ -31,8 +31,9 @@
         <% } %>        
         <% if (user && user.role === "Physical Therapist") { %> 
           <div class="mt-5">
-            <h2>Add a plan</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+            
+            <form action="/post/createPost" enctype="multipart/form-data" method="POST" class="form">
+              <p class="form-title">Add a plan</p>
               <div class="mb-3">
                 <label for="patient" class="form-label">Assign Plan to Patient</label>
                 <select class="form-control" id="patient" name="patient" required>
@@ -75,8 +76,35 @@
           </div>
       </div>
 
-      <div class="col-6">
-        <ul class="row list-unstyled">
+      <div class="w-40 form">
+        <div class="mb-3">
+          <label for="titleFilter" class="form-label">Filter by Plan Title</label>
+          <select id="titleFilter" class="form-control">
+            <!-- <option value="all">All Plans</option> -->
+            <% 
+              const seenTitles = new Set();
+              posts.forEach(post => {
+                if (!seenTitles.has(post.title)) {
+                  seenTitles.add(post.title);
+            %>
+              <option value="<%= post.title %>"><%= post.title %></option>
+            <% 
+                }
+              });
+            %>
+          </select>
+        </div>
+        <ul class="row list-unstyled" id="postList">
+          <% posts.forEach(function(post) { %>
+            <li class="col-6 justify-content-between mt-5 post-item" data-title="<%= post.title %>">
+              <a href="/post/<%= post._id %>">
+                <img class="img-fluid" src="<%= post.image %>">
+              </a>
+              <p class="text-center mt-2">Patient: <%= post.patient?.userName || 'Unassigned' %></p>
+            </li>
+          <% }) %>
+        </ul>
+        <!-- <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <a href="/post/<%= posts[i]._id%>">
@@ -84,7 +112,7 @@
             </a>
           </li>
         <% } %>
-        </ul>
+        </ul> -->
         <div class="row justify-content-center mt-5">
           <!-- Feed of all programs that the Physical Therapist can see of the patients -->
           <a class="btn btn-primary red-bg" href="/feed">Return to all programs</a>

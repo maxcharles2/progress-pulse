@@ -75,11 +75,16 @@ table, th, td {
     margin-bottom: 4rem;
 }
 
+.flex-4 {
+    display: flex;
+    justify-content: center;
+}
+
 .footer {
     color: #fff;
 }
 
-.form {
+.form, .program-select {
     background-color: #fff;
     padding: 1rem;
     min-width: 350px;
@@ -133,6 +138,10 @@ table, th, td {
     background-color: #a8dadc;
 }
 
+.mright-2 {
+    margin-right: 2rem;
+}
+
 .mtop-3 {
     margin-top: 3rem;
 }
@@ -163,6 +172,10 @@ table, th, td {
 
 .w-20 {
     width: 20%;
+}
+
+.w-40 {
+    width: 40%;
 }
 
 .white {

@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const addExerciseBtn = document.getElementById("addExerciseBtn");
     const roleSelect = document.getElementById("role");
     const therapistDiv = document.getElementById("therapistSelect");
+    const titleFilter = document.getElementById('titleFilter');
     // Checker to make sure the button is on the ejs file (footer partial puts the script tag on all ejs files and that button isn't in all of them)
     if(addExerciseBtn){
         let exerciseCount = 1;
@@ -38,5 +39,46 @@ document.addEventListener("DOMContentLoaded", () => {
         roleSelect.addEventListener("change", showTherapistSelection);
         // Also handle case where the page reloads with "Patient" preselected
         showTherapistSelection();
-    }  
+    } 
+    
+    if (titleFilter){
+        function filterPostsByTitle(selectedTitle) {
+            const posts = document.querySelectorAll('.post-item');
+        
+        posts.forEach(post => {
+                const postTitle = post.getAttribute('data-title');
+                post.style.display = (postTitle === selectedTitle) ? 'block' : 'none';
+            });
+        }
+        // Filter on dropdown change
+        if (titleFilter) {
+            titleFilter.addEventListener('change', function () {
+                const selectedTitle = this.value;
+                filterPostsByTitle(selectedTitle);
+            });
+        // Initial filter on page load using first option
+        window.addEventListener('DOMContentLoaded', function () {
+            const defaultTitle = titleFilter.options[0]?.value;
+            if (defaultTitle) {
+                titleFilter.value = defaultTitle;
+                filterPostsByTitle(defaultTitle);
+            }
+        });
+        }
+
+        // titleFilter.addEventListener('change', function () {
+        //     const selectedTitle = this.value;
+        //     const posts = document.querySelectorAll('.post-item');
+        
+        //     posts.forEach(post => {
+        //         const postTitle = post.getAttribute('data-title');
+        //         // if (selectedTitle === 'all' || postTitle === selectedTitle) {
+        //         if (postTitle === selectedTitle) {
+        //             post.style.display = 'block';
+        //         } else {
+        //             post.style.display = 'none';
+        //         }
+        //     });
+        // });
+    }
 })
