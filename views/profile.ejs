@@ -1,7 +1,8 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
+<div class="">
+  <div class="mt-5">
+      <div>
+        <div class="text-center">
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
@@ -12,18 +13,21 @@
         <% if (user.role === "Patient" && user.therapist) { %>
           <p><strong>Physical Therapist</strong>: <%= user.therapist.userName %></p>
         <% } %>
+        </div>
         <% if (user.role === "Patient") { %>
-          <h2 class="text-center">Your Rehab Plan</h2>
-          <ul class="row list-unstyled">
-            <% posts.forEach(post => { %>
-              <li class="col-6 justify-content-between mt-5">
-                <a href="/post/<%= post._id %>">
-                  <img class="img-fluid" src="<%= post.image %>">
-                </a>
-                <p><strong>Posted by:</strong> <%= post.user?.userName || "Unknown" %></p>
-              </li>
-            <% }) %>
-          </ul>
+          <div class="text-center">
+            <h2 class="text-center">Your Rehab Plan</h2>
+            <ul class="ro list-unstyle">
+              <% posts.forEach(post => { %>
+                <li class="text-center no-bullet">
+                  <a href="/post/<%= post._id %>">
+                    <img class="img-fluid w-20" src="<%= post.image %>">
+                  </a>
+                  <p><strong>Posted by:</strong> <%= post.user?.userName || "Unknown" %></p>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
         <% } %>        
         <% if (user && user.role === "Physical Therapist") { %> 
           <div class="mt-5">

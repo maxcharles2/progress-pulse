@@ -125,6 +125,10 @@ table, th, td {
     font-size: 2rem;
 }
 
+.no-bullet {
+    list-style-type: none;
+}
+
 .light-blue-bg {
     background-color: #a8dadc;
 }
@@ -155,6 +159,10 @@ table, th, td {
 
 .w-5 {
     width: 5%;
+}
+
+.w-20 {
+    width: 20%;
 }
 
 .white {
