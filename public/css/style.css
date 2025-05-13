@@ -19,8 +19,28 @@ table, th, td {
     background-color: #457b9d;
 }
 
+.center-form {
+    display: flex;
+    justify-content: center;
+}
+
 .dark-blue-bg {
     background-color: #1d3557;
+}
+
+.form {
+    background-color: #fff;
+    padding: 1rem;
+    min-width: 350px;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
 }
 
 .light-blue-bg {
@@ -33,6 +53,14 @@ table, th, td {
 
 .red-bg {
     background-color: #e63946;
+}
+
+.submit {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    width: 100%;
 }
 
 .text-center {

@@ -2,14 +2,15 @@
 
 <main class="container">
   <div class="row justify-content-center">
-    <section class="col-6 mt-5">
+    <section class="mt-5 center-form">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
       messages.info.forEach( el => { %>
       <div class="alert alert-info"><%= el.msg %></div>
       <% }) %> <% } %>
-      <form action="/login" method="POST">
+      <form action="/login" method="POST" class="form">
+        <p class="form-title">Sign in to your account</p>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
@@ -20,6 +21,7 @@
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             name="email"
+            placeholder="Enter email address"
           />
         </div>
         <div class="mb-3">
@@ -29,9 +31,10 @@
             class="form-control"
             id="exampleInputPassword1"
             name="password"
+            placeholder="Enter password"
           />
         </div>
-        <button type="submit" class="btn btn-primary red-bg">Submit</button>
+        <button type="submit" class="btn btn-primary red-bg submit">Sign in</button>
       </form>
     </section>
   </div>
