@@ -178,6 +178,10 @@ table, th, td {
     width: 40%;
 }
 
+.w-60 {
+    width: 60%;
+}
+
 .white {
     color: #fff;
 }
