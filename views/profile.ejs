@@ -99,7 +99,7 @@
           <% posts.forEach(function(post) { %>
             <li class="col-6 justify-content-between mt-5 post-item" data-title="<%= post.title %>">
               <a href="/post/<%= post._id %>">
-                <img class="img-fluid" src="<%= post.image %>">
+                <img class="img-fluid fit" src="<%= post.image %>">
               </a>
               <p class="text-center mt-2">Patient: <%= post.patient?.userName || 'Unassigned' %></p>
             </li>
