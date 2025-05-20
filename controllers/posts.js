@@ -101,6 +101,19 @@ module.exports = {
       console.log(err);
     }
   },
+  addExercise: async (req, res) => {
+    try {
+      await Post.findByIdAndUpdate(
+        req.params.id, //ex. /post/6824d1d96e9588148d4fc057/addExercise
+        { $push: { exercises: req.body } }, //add submitted exercise to the array in Post.js controller
+        { new: true }
+      );
+      res.redirect(`/post/${req.params.id}`); //redirects back to specific post
+    } catch (err) {
+      console.error(err);
+      res.redirect("/profile");
+    }
+  },
   updateExercise: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
