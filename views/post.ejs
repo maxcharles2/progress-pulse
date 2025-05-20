@@ -76,25 +76,31 @@
         </thead>
         <tbody id="editExerciseContainer" data-exercise-count="<%= post.exercises.length %>" data-post-id="<%= post._id %>">
           <% post.exercises.forEach((ex, index) => { %>
-            <form action="/post/<%= post._id %>/editExercise/<%= index %>?_method=PUT" method="POST">
               <tr>
-                <td><input name="day" type="text" value="<%= ex.day %>" class="form-control" /></td>
-                <td><input name="name" type="text" value="<%= ex.name %>" class="form-control" /></td>
-                <td><input name="sets" type="number" value="<%= ex.sets %>" class="form-control" /></td>
-                <td><input name="reps" type="number" value="<%= ex.reps %>" class="form-control" /></td>
+                <td><input name="day" type="text" value="<%= ex.day %>" class="form-control" form="form-<%= index %>" /></td>
+                <td><input name="name" type="text" value="<%= ex.name %>" class="form-control" form="form-<%= index %>" /></td>
+                <td><input name="sets" type="number" value="<%= ex.sets %>" class="form-control" form="form-<%= index %>" /></td>
+                <td><input name="reps" type="number" value="<%= ex.reps %>" class="form-control" form="form-<%= index %>" /></td>
                 <td>
-                  <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                  <button type="submit" class="btn btn-primary btn-sm" form="form-<%= index %>">Update</button>
                 </td>
                 <td>
-                  <button type="submit" formaction="/post/<%= post._id %>/deleteExercise/<%= index %>?_method=DELETE" formmethod="POST" class="btn btn-danger btn-sm">Delete</button>
+                  <button type="submit" formaction="/post/<%= post._id %>/deleteExercise/<%= index %>?_method=DELETE" formmethod="POST" class="btn btn-danger btn-sm" form="form-<%= index %>">Delete</button>
                 </td>
               </tr>
-            </form>
           <% }) %>
         </tbody>
       </table>
       <button id="addEditExerciseBtn" type="button" class="btn btn-success btn-sm mt-3">Add new exercise</button> 
     <% } %>
+    <% post.exercises.forEach((ex, index) => { %>
+      <form
+        id="form-<%= index %>"
+        action="/post/<%= post._id %>/editExercise/<%= index %>?_method=PUT"
+        method="POST"
+        class="hidden"
+      ></form>
+    <% }) %>
 
       <h2>Patient feedback/questions</h2>
       <form action="/comment/createComment/<%=post._id%>" method="POST">

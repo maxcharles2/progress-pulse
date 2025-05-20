@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
             form.action = `/post/${postId}/addExercise?_method=PUT`;
             form.method = "POST";
             form.id = formId;
-            form.style.display = "none"; // Keeps it hidden from the UI
+            // form.style.display = "none"; // Keeps it hidden from the UI
 
             // Append the hidden form to the body (not inside table!)
             document.body.appendChild(form);
